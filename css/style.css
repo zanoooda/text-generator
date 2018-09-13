@@ -1,0 +1,10 @@
+#settings {
+    display: flex;
+    flex-direction: row-reverse;
+}
+#rules {
+    flex: 50%;
+}
+#lexicon {
+    flex: 50%;
+}
