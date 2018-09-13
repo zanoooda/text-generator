@@ -1,35 +1,7 @@
-body {
-    background-color: pink;
-}
-header {
-    background-color: lightblue;
-}
-section {
-    margin: 1em; 
-}
-#content {
-    background-color: yellow;
-}
-#text {
-    /* padding: 5%; */
-    background-color: blue;
-}
 #settings {
     display: flex;
     flex-direction: row-reverse;
-
-    background-color: red;
 }
-#rules {
+#rules, #lexicon {
     flex: 50%;
-
-    background-color: orangered;
-}
-#lexicon {
-    flex: 50%;
-
-    background-color: green;
-}
-footer {
-    background-color: brown;
 }
