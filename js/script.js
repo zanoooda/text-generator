@@ -13,6 +13,7 @@ document.getElementById("generate-text-button").addEventListener("click", functi
         document.getElementById("blockquote").innerHTML = text;
     } else {
         document.getElementById("blockquote").innerHTML = new Sentence();
+        // focus to text
     }
 });
 
@@ -35,15 +36,12 @@ function remove(id) {
     });
 
     if(one == "l") {
-        lexicon[two] = lexicon[two].splice(three, 1);
+        lexicon[two].splice(three, 1);
     } else if (one == "r") {
-        rules[two] = rules[two].splice(three, 1);
+        rules[two].splice(three, 1);
     }
     redraw();
 } 
-
-// Init
-
 function redraw() {
     document.getElementById('rules-list').innerHTML = "";
     document.getElementById('lexicon-list').innerHTML = "";
@@ -128,4 +126,6 @@ function redraw() {
 
 }
 
+
+// Init
 redraw()
