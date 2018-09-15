@@ -1,7 +1,23 @@
-#settings {
-    display: flex;
-    flex-direction: row-reverse;
+#blockquote {
+    display: none;
 }
-#rules, #lexicon {
-    flex: 50%;
+#settings {
+    display: inline-block;
+}
+#lexicon {
+    float: right;
+    width: 50%;
+    padding-left: 1em;
+}
+
+.x {
+	color: red;
+    text-decoration: none;
+}
+
+.rule {
+    background-color: Gainsboro; 
+}
+.rule:hover, rule:focus {
+	background-color: yellow
 }

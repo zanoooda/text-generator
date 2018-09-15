@@ -10,17 +10,39 @@
 
 <body>
     <section id="content">
-        <header>
-            <h1>Text Generator</h1>
-        </header>
-        <section id="text"></section>
-        <section id="settings">
-            <section id="lexicon"></section>
-            <section id="rules"></section>
+        <section id="header">
+            <header>
+                <h1>Text Generator</h1>
+            </header>
         </section>
-        <footer>
-            Footer
-        </footer>
+        <section id="text">
+            <blockquote id="blockquote"></blockquote>
+        </section>
+        <section id="settings">
+            <section id="lexicon">
+                <h3>Lexicon</h3>
+                <div id="lexicon-create-group">
+                    <input id="lexicon-create-group-input" type="text" placeholder="Create lexicon group">
+                    <button id="lexicon-create-group-button">Create</button>
+                </div>
+            </section>
+            <section id="rules">
+                <h3>Rules</h3>
+                <div id="rules-create-group">
+                    <input id="rules-create-group-input" type="text" placeholder="Create rules group">
+                    <button id="rules-create-group-button">Create</button>
+                </div>
+            </section>
+            <section id="operations">
+                <input id="sentences-quantity" type="number" placeholder="Sentences quantity">
+                <button id="generate-text-button">Generate text</button>
+            </section>
+        </section>
+        <section id="footer">
+            <footer>
+                Footer
+            </footer>
+        </section>
     </section>
     
     <script src="js/sentence-generator.js" ></script>
