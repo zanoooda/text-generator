@@ -14,10 +14,3 @@
 	color: red;
     text-decoration: none;
 }
-
-.rule {
-    background-color: Gainsboro; 
-}
-.rule:hover, rule:focus {
-	background-color: yellow
-}
