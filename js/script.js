@@ -76,8 +76,11 @@ function render(object) {
         // button.addEventListener("click", function() {
         //     alert('yo yo Yooo');
         // });
-        button.onclick = function() {
-            alert('Yo ho ho!');
+        // button.onclick = function() {
+        //     alert('Yo ho ho!');
+        // }
+        button.onmouseout = function() {
+            alert('onmouseout');
         }
         
 
