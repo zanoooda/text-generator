@@ -2,130 +2,133 @@
 
 // Listeners
 document.getElementById("generate-text-button").addEventListener("click", function(){
-    document.getElementById("blockquote").style.display = "block";
-
+    let blockquote = document.getElementById("blockquote");
     let quantity = document.getElementById("sentences-quantity").value;
+
     if(quantity) {
         let text = new String();
         for (let index = 0; index < quantity; index++) {
             text += " " + new Sentence();
         }
-        document.getElementById("blockquote").innerHTML = text;
+        blockquote.innerHTML = text;
     } else {
-        document.getElementById("blockquote").innerHTML = new Sentence();
-        // focus to text
+        blockquote.innerHTML = new Sentence();
     }
+    blockquote.style.display = "block";
+    // Doesn't work
+    blockquote.focus();
 });
 
 // Functions
-function remove(id) {
-    alert(id);
-
-    let one = new String();
-    let two = new String();
-    let three = new String();
-
-    id.split("-").forEach((part, index) => {
-        if(index == 0) {
-            one = part;
-        } else if(index == 1) {
-            two = part;
-        } else if(index == 2) {
-            three = part;
-        }
-    });
-
-    if(one == "l") {
-        lexicon[two].splice(three, 1);
-    } else if (one == "r") {
-        rules[two].splice(three, 1);
+function remove(what, group, id) {
+    // Better to render only specific group
+    if(what == "lexicon") {
+        lexicon[group].splice(id, 1);
+        render(lexicon);
+    } else {
+        rules[group].splice(id, 1);
+        render(rules);
     }
-    redraw();
-} 
-function redraw() {
-    document.getElementById('rules-list').innerHTML = "";
-    document.getElementById('lexicon-list').innerHTML = "";
+}
+function push() {
+    alert('push')
+}
+function render(object) {
+    let objectName = object == lexicon ? "lexicon" : "rules";
 
-    Object.keys(lexicon).forEach(function(key) {
+    document.getElementById(objectName + '-list').innerHTML = "";
+    
+    Object.keys(object).forEach(function(key) {
         let container = document.createElement("div");
-        
+        // add indication for renderGroup
+
+        // container.addEventListener("click", function() {
+        //     alert(objectName + ", " + key);
+        // });
+        container.onclick = function() {
+            alert(objectName + ", " + key);
+        }
+
+        container.id = objectName + "-" + key + "-container";
+
         let input = document.createElement("input");
         input.type = "text";
         input.placeholder = key;
+        input.id = objectName + "-" + key + "-input";
+
         container.appendChild(input);
-        
+
         container.innerHTML += " ";
+
+        // let button = document.createElement("input");
+        // button.type = "button";
+        // button.value = "Append";
+        // button.id = objectName + "-" + key + "-button";
+
+        let button = document.createElement("button");
+        //button.type = "button";
+        //button.type = ""
+        button.innerHTML = "Append";
+        button.id = objectName + "-" + key + "-button";
+
+        //button.onclick = "push()"; // Doesn't work
+        //button.addEventListener("click", push, false);
+        // button.addEventListener("click", function() {
+        //     alert('yo yo Yooo');
+        // });
+        button.onclick = function() {
+            alert('Yo ho ho!');
+        }
         
-        let button = document.createElement("input");
-        button.type = "button";
-        button.value = "Append";
+
         container.appendChild(button);
-        
-        container.appendChild(document.createElement("br"));
-        
-        lexicon[key].forEach((word, index)=> {
+
+        container.innerHTML += "<br />";
+
+        object[key].forEach((element, index)=> {
             let span = document.createElement("span");
-            
             span.contentEditable = "true";
-            
-            span.innerHTML = word;
+            span.innerHTML = element;
+
+            // span.onclick = function() {
+            //     alert('io')
+            // }
+            span.addEventListener("click", function() {
+                alert('ioio')
+            });
+
             container.appendChild(span);
             
-            let d = document.createElement("a");
-            d.className = "x"
-            d.href = "javascript:remove(" + "\"l-" + key + "-" + index + "\")";
-            d.innerHTML = "<sup>×</sup>";
-            container.appendChild(d);
+            let x = document.createElement("a");
+            x.className = "x";
+            x.href = "javascript:remove('" + objectName + "', '" + key + "', '" + index + "')";
+            x.innerHTML = "<sup>×</sup>";
+            container.appendChild(x);
             
             container.innerHTML += " ";
         });
         
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
+        container.innerHTML += "<br /><br />";
 
-        document.getElementById('lexicon-list').appendChild(container);
+	    document.getElementById(objectName + '-list').appendChild(container);
     });
-
-    Object.keys(rules).forEach(function(definition) {
-        let container = document.createElement("div");
-        
-        let input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = definition;
-        container.appendChild(input);
-        
-        container.innerHTML += " ";
-        
-        let button = document.createElement("input");
-        button.type = "button";
-        button.value = "Add";
-        container.appendChild(button);
-        
-        container.appendChild(document.createElement("br"));
-        
-        rules[definition].forEach((rule, index) => {
-            let span = document.createElement("span");
-            span.contentEditable = "true";
-            span.innerHTML = rule;
-            container.appendChild(span);
-            
-            let d = document.createElement("a");
-            d.className = "x"
-            d.href = "javascript:remove(" + "\"r-" + definition + "-" + index + "\")";
-            d.innerHTML = "<sup>×</sup>";
-            container.appendChild(d);
-            
-            container.innerHTML += " ";
-        });
-        
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
-        
-        document.getElementById('rules-list').appendChild(container);
-    });  
-
 }
 
-
 // Init
-redraw()
+render(lexicon);
+render(rules);
+
+// let collection = document.getElementsByTagName("button");
+// for (let index = 0; index < collection.length; index++) {
+//     let element = collection[index];
+//     element.addEventListener("click", function() {
+//         alert("Noo");
+//     });
+// }
+
+let button = document.createElement("button");
+button.innerHTML = "button";
+button.onclick = function() {
+    alert("button");
+}
+document.getElementsByTagName("body")[0].appendChild(button);

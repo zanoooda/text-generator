@@ -53,7 +53,7 @@ let lexicon = {
 
         // 
         "professor",
-        "gurd",
+        "guard",
         "book",
         "process",
         "object",
