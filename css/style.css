@@ -3,6 +3,8 @@
 }
 #settings {
     display: inline-block;
+    /* display: block; */
+    /* display: inline; */
 }
 #lexicon {
     float: right;

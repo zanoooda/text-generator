@@ -1,6 +1,14 @@
 "use strict"
 
 // Listeners
+document.getElementById("rules-create-group-button").addEventListener("click", function() {
+    rules[document.getElementById("rules-create-group-input").value] = new Array();
+    render(rules);
+});
+document.getElementById("lexicon-create-group-button").addEventListener("click", function() {
+    lexicon[document.getElementById("lexicon-create-group-input").value] = new Array();
+    render(lexicon);
+});
 document.getElementById("generate-text-button").addEventListener("click", function(){
     let blockquote = document.getElementById("blockquote");
     let quantity = document.getElementById("sentences-quantity").value;
@@ -14,34 +22,27 @@ document.getElementById("generate-text-button").addEventListener("click", functi
     } else {
         blockquote.innerHTML = new Sentence();
     }
+
     blockquote.style.display = "block";
-    // Doesn't work
-    blockquote.focus();
+    blockquote.focus(); // Doesn't work
 });
 
 // Functions
-function remove(what, group, id) {
-    // Better to render only specific group
-    if(what == "lexicon") {
-        lexicon[group].splice(id, 1);
-        render(lexicon);
-    } else {
-        rules[group].splice(id, 1);
-        render(rules);
-    }
+function add(object, key, element) {
+    object[key].push(element);
+    render(object); // Better to render only specific group or here just add another element
 }
-function push() {
-    alert('push')
+function remove(object, key, id) {
+    object[key].splice(id, 1);
+    render(object); // Better to render only specific group
 }
 function render(object) {
     let objectName = object == lexicon ? "lexicon" : "rules";
-
+    // Clean container
     document.getElementById(objectName + '-list').innerHTML = "";
     
     Object.keys(object).forEach(function(key) {
         let container = document.createElement("div");
-        // add indication for renderGroup
-
         container.id = objectName + "-" + key + "-container";
 
         let input = document.createElement("input");
@@ -57,13 +58,12 @@ function render(object) {
         container.appendChild(whitespace);
 
         let button = document.createElement("button");
-        button.innerHTML = "Append";
+        button.innerHTML = "Push";
         button.id = objectName + "-" + key + "-button";
         button.onclick = function() {
-            alert('Yo ho ho!');
+            add(object, key, document.getElementById(objectName + "-" + key + "-input").value);
         }
         
-
         container.appendChild(button);
 
         //container.innerHTML += "<br />";
@@ -78,14 +78,10 @@ function render(object) {
             
             let x = document.createElement("a");
             x.className = "x";
-            x.href = "javascript:remove('" + objectName + "', '" + key + "', '" + index + "')";
+            x.href = "javascript:remove(" + objectName + ", '" + key + "', '" + index + "')";
             x.innerHTML = "<sup>×</sup> "; // Here is whitespace now
             container.appendChild(x);
         });
-        
-        //container.innerHTML += "<br /><br />";
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
 
 	    document.getElementById(objectName + '-list').appendChild(container);
     });
