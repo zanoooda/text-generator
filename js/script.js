@@ -42,13 +42,6 @@ function render(object) {
         let container = document.createElement("div");
         // add indication for renderGroup
 
-        // container.addEventListener("click", function() {
-        //     alert(objectName + ", " + key);
-        // });
-        // container.onclick = function() {
-        //     alert(objectName + ", " + key);
-        // }
-
         container.id = objectName + "-" + key + "-container";
 
         let input = document.createElement("input");
@@ -58,27 +51,14 @@ function render(object) {
 
         container.appendChild(input);
 
-        container.innerHTML += " ";
-
-        // let button = document.createElement("input");
-        // button.type = "button";
-        // button.value = "Append";
-        // button.id = objectName + "-" + key + "-button";
+        // find better solution
+        let whitespace = document.createElement("span");
+        whitespace.innerHTML = " ";
+        container.appendChild(whitespace);
 
         let button = document.createElement("button");
-        //button.type = "button";
-        //button.type = ""
         button.innerHTML = "Append";
         button.id = objectName + "-" + key + "-button";
-
-        //button.onclick = "push()"; // Doesn't work
-        //button.addEventListener("click", push, false);
-        // button.addEventListener("click", function() {
-        //     alert('yo yo Yooo');
-        // });
-        // button.onclick = function() {
-        //     alert('Yo ho ho!');
-        // }
         button.onclick = function() {
             alert('Yo ho ho!');
         }
@@ -86,32 +66,26 @@ function render(object) {
 
         container.appendChild(button);
 
-        container.innerHTML += "<br />";
+        //container.innerHTML += "<br />";
+        container.appendChild(document.createElement("br"));
 
         object[key].forEach((element, index)=> {
             let span = document.createElement("span");
             span.contentEditable = "true";
             span.innerHTML = element;
 
-            // span.onclick = function() {
-            //     alert('io')
-            // }
-            span.addEventListener("click", function() {
-                alert('ioio')
-            });
-
             container.appendChild(span);
             
             let x = document.createElement("a");
             x.className = "x";
             x.href = "javascript:remove('" + objectName + "', '" + key + "', '" + index + "')";
-            x.innerHTML = "<sup>×</sup>";
+            x.innerHTML = "<sup>×</sup> "; // Here is whitespace now
             container.appendChild(x);
-            
-            container.innerHTML += " ";
         });
         
-        container.innerHTML += "<br /><br />";
+        //container.innerHTML += "<br /><br />";
+        container.appendChild(document.createElement("br"));
+        container.appendChild(document.createElement("br"));
 
 	    document.getElementById(objectName + '-list').appendChild(container);
     });
@@ -121,17 +95,3 @@ function render(object) {
 render(lexicon);
 render(rules);
 
-// let collection = document.getElementsByTagName("button");
-// for (let index = 0; index < collection.length; index++) {
-//     let element = collection[index];
-//     element.addEventListener("click", function() {
-//         alert("Noo");
-//     });
-// }
-
-let button = document.createElement("button");
-button.innerHTML = "button";
-button.onclick = function() {
-    alert("button");
-}
-document.getElementsByTagName("body")[0].appendChild(button);
