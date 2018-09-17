@@ -45,9 +45,9 @@ function render(object) {
         // container.addEventListener("click", function() {
         //     alert(objectName + ", " + key);
         // });
-        container.onclick = function() {
-            alert(objectName + ", " + key);
-        }
+        // container.onclick = function() {
+        //     alert(objectName + ", " + key);
+        // }
 
         container.id = objectName + "-" + key + "-container";
 
@@ -79,8 +79,8 @@ function render(object) {
         // button.onclick = function() {
         //     alert('Yo ho ho!');
         // }
-        button.onmouseout = function() {
-            alert('onmouseout');
+        button.onclick = function() {
+            alert('Yo ho ho!');
         }
         
 
