@@ -72,6 +72,9 @@ function render(object) {
         object[key].forEach((element, index)=> {
             let span = document.createElement("span");
             span.contentEditable = "true";
+            span.addEventListener("input", function() {
+                object[key][index] = span.innerHTML; 
+            });
             span.innerHTML = element;
 
             container.appendChild(span);
