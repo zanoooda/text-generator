@@ -153,7 +153,12 @@ let lexicon = {
         "but",
         "or",
         "so"
-    ]
+    ],
+	"Emoji": [
+		"😂",
+		"😊",
+		"😣"
+	]
 };
 let punctuation = ".,?!:;()";
 let exceptedPunctuation = "(";
